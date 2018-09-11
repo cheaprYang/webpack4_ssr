@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --open --config build/webpack.spa.dev.js",
+    "dev:spa": "webpack-dev-server --hot --open --config build/webpack.spa.dev.js",
     "build": "webpack --config build/webpack.spa.pro.js",
     "dev": "node server",
+    "start": "cross-env NODE_ENV=production node server",
     "server": "cross-env NODE_ENV=development node server",
     "build": "rimraf dist && npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.js --progress --hide-modules",
