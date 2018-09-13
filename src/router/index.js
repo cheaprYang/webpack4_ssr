@@ -6,7 +6,7 @@ import Home from '../views/home/index'
 import about from '../views/about/index'
 export  default ()=>{
     return new Router({
-        // mode: 'history',
+         mode: 'history',
         routes:[
             {
                 path:'/',

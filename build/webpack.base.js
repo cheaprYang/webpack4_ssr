@@ -1,41 +1,57 @@
-//'use strict'
+'use strict'
 const path=require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const utils=require('./utils')
-const config=require('../webpack.config')
-const vueLoaderConfig = require('./vue-loader.conf')
-console.log(config.build)
+
 module.exports={
     target: "web",
-    context: path.resolve(__dirname, '../'),
     devtool: "#source-map",
     mode: 'development',
     entry:'./src/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        publicPath:'static',
-        filename: '[name].js'
-    },
-    resolve: {
-        extensions: ['.js','.vue','.less','.css'],
-        alias: {
-            'vue': 'vue/dist/vue.esm.js',
-            '@': path.resolve('src'),
-        }
+        path: path.resolve(__dirname, '../dist'),
+        publicPath: '/',
+        filename: 'js/[name].js'
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: ["babel-loader"],
+                use: ["babel-loader"]
             },
             {
                 test:/\.vue$/,
                 loader:'vue-loader',
-                options:vueLoaderConfig
+                options: {
+                    extractCSS: true
+                }
+            },
+            {// loader less and css
+                test: /\.(less|css)$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1,
+                            minimize: true,
+                           // sourceMap: true,
+                            modules:false
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: path.resolve(__dirname, './postcss.config.js')
+                            },
+                           // sourceMap: true
+                        },
+                    },
+                    "less-loader"
+                ]
             },
             {
                 test: /\.(png|svg|jpg|gif|jpeg)$/,
@@ -44,38 +60,27 @@ module.exports={
                         loader: 'file-loader',
                         options: {
                             limit: 5000,
-                            name:utils.assetsPath('img/[name].[hash:7].[ext]'),
+                            name: "imgs/[name].[ext]",
                         }
                     },
                 ]
             },
-            {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader:'url-loader',
-                options: {
-                    limit: 10000,
-                    name: utils.assetsPath('img/[name].[hash:7].[ext]')
-                }
-            },
-            {
-                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-                loader:'url-loader',
-                options: {
-                    limit: 10000,
-                    name: utils.assetsPath('media/[name].[hash:7].[ext]')
-                }
-            },
-            {
-                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader:'url-loader',
-                options: {
-                    limit: 10000,
-                    name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-                }
-            }
         ]
     },
      plugins: [
          new VueLoaderPlugin(),
-     ]
+         new FriendlyErrorsPlugin(),
+         new MiniCssExtractPlugin({
+             filename: "static/css/app.[name].css",
+             chunkFilename: "static/css/app.[id].css",
+             sourceMap: false
+         }),
+     ],
+    resolve: {
+        extensions: ['.js','.vue','.less','.css'],
+        alias: {
+            'vue': 'vue/dist/vue.esm.js',
+            '@': path.resolve('src'),
+        }
+    }
 }

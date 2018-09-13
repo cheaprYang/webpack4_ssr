@@ -1,0 +1,91 @@
+{
+  "publicPath": "/",
+  "all": [
+    "static/css/app.0.css",
+    "static/js/app.2b23a1b9.js",
+    "static/js/vendor.6fc82e45.js",
+    "static/js/manifest.0e4d3e78.js",
+    "index.html"
+  ],
+  "initial": [
+    "static/js/manifest.0e4d3e78.js",
+    "static/js/vendor.6fc82e45.js",
+    "static/js/app.2b23a1b9.js"
+  ],
+  "async": [],
+  "modules": {
+    "9b27bed6": [
+      0,
+      1
+    ],
+    "36f4a9ff": [
+      0,
+      1
+    ],
+    "0e60471a": [
+      0,
+      1
+    ],
+    "24eaeb86": [
+      0,
+      1
+    ],
+    "2e286098": [
+      2
+    ],
+    "3a2fb6ed": [
+      0,
+      1
+    ],
+    "f13ed9fa": [
+      0,
+      1
+    ],
+    "1b040246": [
+      2
+    ],
+    "27d24ddd": [
+      2
+    ],
+    "67e74346": [
+      0,
+      1
+    ],
+    "c86db4a6": [
+      2
+    ],
+    "5e677102": [
+      0,
+      1
+    ],
+    "9bb67672": [
+      2
+    ],
+    "325f6fc1": [
+      0,
+      1
+    ],
+    "63f72aef": [
+      0,
+      1
+    ],
+    "53d21d5b": [
+      2
+    ],
+    "2af10a4f": [
+      0,
+      1
+    ],
+    "74eb599e": [
+      0,
+      1
+    ],
+    "5d09871e": [
+      2
+    ],
+    "924ee2aa": [
+      0,
+      1
+    ]
+  }
+}

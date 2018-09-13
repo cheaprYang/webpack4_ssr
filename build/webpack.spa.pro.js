@@ -17,13 +17,13 @@ const utils=require('./utils');
 module.exports=merge(baseConfig,{
     mode:'production',
     devtool: '#cheap-module-source-map',
-    // module: {
-    //     rules: utils.styleLoaders({
-    //         sourceMap: config.build.productionSourceMap,
-    //         extract: true,
-    //         usePostCSS: true
-    //     })
-    // },
+    module: {
+        rules: utils.styleLoaders({
+            sourceMap: config.build.productionSourceMap,
+            extract: true,
+            usePostCSS: true
+        })
+    },
     output:{
         path: path.resolve(__dirname, '../dist'),
         publicPath: "/static/",
@@ -33,6 +33,9 @@ module.exports=merge(baseConfig,{
     plugins:[
         new CleanWebpackPlugin(['dist/*'], {
             root: path.resolve(__dirname, '../')
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
