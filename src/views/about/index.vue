@@ -1,6 +1,6 @@
 <template>
-    <div class="test">
-       <p class="title">测试</p>
+    <div class="about">
+       <p class="title">关于我们</p>
     </div>
 </template>
 
@@ -10,9 +10,9 @@
     }
 </script>
 
-<style lang="less">
-  .test{
-      background-color: red;
+<style >
+  .about{
+      background-color: cadetblue;
 
   }
 </style>

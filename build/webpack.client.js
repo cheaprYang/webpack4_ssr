@@ -1,9 +1,14 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const path=require('path')
 const base = require('./webpack.base')
 const SWPrecachePlugin = require('sw-precache-webpack-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const  isProd=process.env.NODE_ENV === 'production'
 
 module.exports=merge(base,{
@@ -16,6 +21,10 @@ module.exports=merge(base,{
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
                 'process.env.VUE_ENV': '"client"'
+            }),
+            new MiniCssExtractPlugin({
+                filename: 'static/css/app.[name].css',
+                chunkFilename: 'static/css/app.[contenthash:12].css'
             }),
             new VueSSRClientPlugin(),
             new SWPrecachePlugin({
@@ -45,6 +54,10 @@ module.exports=merge(base,{
             })
         ]:
         [
+            new MiniCssExtractPlugin({
+                filename: 'static/css/app.[name].css',
+                chunkFilename: 'static/css/app.[contenthash:12].css'
+            }),
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
                 'process.env.VUE_ENV': '"client"'
@@ -53,6 +66,23 @@ module.exports=merge(base,{
         ]
     ,
     optimization: {
+        minimizer: [
+            // 压缩JS
+            new UglifyJsPlugin({
+                uglifyOptions: {
+                    compress: {
+                        warnings: false, // 去除警告
+                        drop_debugger: true, // 去除debugger
+                        drop_console: true // 去除console.log
+                    },
+                },
+                cache: true, // 开启缓存
+                parallel: true, // 平行压缩
+                sourceMap: false // set to true if you want JS source maps
+            }),
+            // 压缩css
+            // new OptimizeCSSAssetsPlugin({})
+        ],
         runtimeChunk: {
             name: 'manifest'
         },

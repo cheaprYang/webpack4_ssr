@@ -2,9 +2,11 @@ import Vue from 'vue';
 import Router from 'vue-router'
 Vue.use(Router)
 import views from '../views/index'
+import Home from '../views/home/index'
+import about from '../views/about/index'
 export  default ()=>{
     return new Router({
-        mode: 'history',
+        // mode: 'history',
         routes:[
             {
                 path:'/',
@@ -15,7 +17,13 @@ export  default ()=>{
             {
                 path:'/home',
                 name: 'home',
-                component:views,
+                component:Home,
+                meta:{title:"主体路由"},
+            },
+            {
+                path:'/about',
+                name: 'about',
+                component:about,
                 meta:{title:"主体路由"},
             }
         ]

@@ -1,84 +1,67 @@
-const webpack=require('webpack')
+const webpack = require('webpack')
 const merge = require('webpack-merge');
 const path=require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const baseConfig=require('./webpack.base')
+const utils=require('./utils');
+
 module.exports=merge(baseConfig,{
     mode:'production',
+    devtool: '#cheap-module-source-map',
+    // module: {
+    //     rules: utils.styleLoaders({
+    //         sourceMap: config.build.productionSourceMap,
+    //         extract: true,
+    //         usePostCSS: true
+    //     })
+    // },
     output:{
-        filename:'js/[name].[contenthash].js',
-        path:path.resolve(__dirname,'../dist')
-    },
-    module: {
-        rules: [
-            {
-                test: /\.less$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            // you can specify a publicPath here
-                            // by default it use publicPath in webpackOptions.output
-                            publicPath: '../'
-                        }
-                    },
-                    'css-loader',
-                    'postcss-loader',
-                    'less-loader',
-                ],
-            },
-            {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            limit: 5000,
-                            name: "imgs/[hash].[ext]",
-                        }
-                    },
-                    // 图片压缩
-                    {
-                        loader: 'image-webpack-loader',
-                        options: {
-                            //   bypassOnDebug: true,
-                            mozjpeg: {
-                                progressive: true,
-                                quality: 65
-                            },
-                            optipng: {
-                                enabled: false,
-                            },
-                            pngquant: {
-                                quality: '65-90',
-                                speed: 4
-                            },
-                            gifsicle: {
-                                interlaced: false,
-                            }
-                        },
-                    },
-                ]
-            },
-        ]
+        path: path.resolve(__dirname, '../dist'),
+        publicPath: "/static/",
+        filename: utils.assetsPath('js/[name].[chunkhash].js'),
+        chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
     },
     plugins:[
         new CleanWebpackPlugin(['dist/*'], {
             root: path.resolve(__dirname, '../')
         }),
         new MiniCssExtractPlugin({
-            filename: "css/[name].[hash].css",
-            chunkFilename: 'css/[id].[hash].css'
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: utils.assetsPath('css/[name].[contenthash].css'),
+        }),
+        new OptimizeCSSPlugin({
+            cssProcessorOptions: config.build.productionSourceMap
+                ? { safe: true, map: { inline: false } }
+                : { safe: true }
+        }),
+        new webpack.HashedModuleIdsPlugin(),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template:path.resolve(__dirname, '../public/index.html'),
+            inject: true,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeAttributeQuotes: true
+            },
+
+            chunksSortMode: 'dependency'
         }),
     ],
     optimization: {
         // 分离chunks
         splitChunks: {
-            chunks: 'all',
+            // chunks: 'all',
             cacheGroups: {
                 vendor: {
                     name: "vendor",
@@ -86,6 +69,12 @@ module.exports=merge(baseConfig,{
                     priority: 10,
                     chunks: "initial" // 只打包初始时依赖的第三方
                 },
+                styles: {
+                    name: 'styles',
+                    test: /\.css$/,
+                    chunks: 'all',
+                    enforce: true
+                }
             }
         },
         minimizer: [
@@ -103,7 +92,10 @@ module.exports=merge(baseConfig,{
                 sourceMap: false // set to true if you want JS source maps
             }),
             // 压缩css
-            new OptimizeCSSAssetsPlugin({})
-        ]
+            // new OptimizeCSSAssetsPlugin({})
+        ],
+        runtimeChunk: {
+            name: "manifest"
+        },
     },
 })

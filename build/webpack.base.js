@@ -1,45 +1,41 @@
-const webpack=require('webpack')
+//'use strict'
 const path=require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-const HappyPack = require('happypack');
-const os = require('os');
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const utils=require('./utils')
+const config=require('../webpack.config')
+const vueLoaderConfig = require('./vue-loader.conf')
+console.log(config.build)
 module.exports={
+    target: "web",
+    context: path.resolve(__dirname, '../'),
+    devtool: "#source-map",
     mode: 'development',
     entry:'./src/index.js',
     output: {
-        path: path.resolve(__dirname, '../dist'),
-        publicPath: '/dist/',
-        filename: '[name].[chunkhash:8].js'
+        path: path.resolve(__dirname, 'dist'),
+        publicPath:'static',
+        filename: '[name].js'
+    },
+    resolve: {
+        extensions: ['.js','.vue','.less','.css'],
+        alias: {
+            'vue': 'vue/dist/vue.esm.js',
+            '@': path.resolve('src'),
+        }
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                //把对.js 的文件处理交给id为happyBabel 的HappyPack 的实例执行
-                loader: 'happypack/loader?id=happyBabel',
-                //排除node_modules 目录下的文件
-                exclude: /node_modules/
+                exclude: /node_modules/,
+                use: ["babel-loader"],
             },
             {
                 test:/\.vue$/,
-                loader:'vue-loader'
-            },
-            {
-                test: /\.css$/,
-                use: ['vue-style-loader', 'css-loader']
-            },
-            {
-                test: /\.less$/,
-                use: [
-                    'vue-style-loader',
-                    'css-loader',
-                    'postcss-loader',
-                    'less-loader',
-                ],
+                loader:'vue-loader',
+                options:vueLoaderConfig
             },
             {
                 test: /\.(png|svg|jpg|gif|jpeg)$/,
@@ -48,40 +44,38 @@ module.exports={
                         loader: 'file-loader',
                         options: {
                             limit: 5000,
-                            name: "imgs/[name].[ext]",
+                            name:utils.assetsPath('img/[name].[hash:7].[ext]'),
                         }
                     },
                 ]
             },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader:'url-loader',
+                options: {
+                    limit: 10000,
+                    name: utils.assetsPath('img/[name].[hash:7].[ext]')
+                }
+            },
+            {
+                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+                loader:'url-loader',
+                options: {
+                    limit: 10000,
+                    name: utils.assetsPath('media/[name].[hash:7].[ext]')
+                }
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader:'url-loader',
+                options: {
+                    limit: 10000,
+                    name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+                }
+            }
         ]
     },
-    plugins: [
-        new webpack.HashedModuleIdsPlugin(),
-        new VueLoaderPlugin(),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../public/index.html'),
-        }),
-        new HappyPack({
-            //用id来标识 happypack处理类文件
-            id: 'happyBabel',
-            //如何处理 用法和loader 的配置一样
-            loaders: [{
-                loader: 'babel-loader?cacheDirectory=true',
-            }],
-            //共享进程池
-            threadPool: happyThreadPool,
-            //允许 HappyPack 输出日志
-            verbose: true,
-        }),
-        // 解决vender后面的hash每次都改变
-        new webpack.HashedModuleIdsPlugin(),
-        new FriendlyErrorsPlugin()
-    ],
-    resolve: {
-        extensions: ['.js','.vue'],
-        alias: {
-            'vue': 'vue/dist/vue.esm.js',
-            '@': path.resolve('src'),
-        }
-    }
+     plugins: [
+         new VueLoaderPlugin(),
+     ]
 }

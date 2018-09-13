@@ -1,6 +1,6 @@
 <template>
-    <div class="test">
-       <p class="title">测试</p>
+    <div class="home">
+       <p class="title">首页</p>
     </div>
 </template>
 
@@ -11,8 +11,10 @@
 </script>
 
 <style lang="less">
-  .test{
-      background-color: red;
-
+  .home{
+      background-color: yellow;
+     .title{
+         color: red;
+     }
   }
 </style>
