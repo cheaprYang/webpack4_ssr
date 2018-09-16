@@ -38,7 +38,7 @@ module.exports=merge(base,{
                     collapseWhitespace: true,
                     removeAttributeQuotes: true
                 },
-
+                templateContent:'<div id="app"></div>',
                 chunksSortMode: 'dependency'
             }),
             new VueSSRClientPlugin(),

@@ -6,7 +6,14 @@
 
 <script>
     export default {
-        name: "index"
+        name: "index",
+        title:'关于我们',
+        head: {
+            // if no subcomponents specify a metaInfo.title, this title will be used
+            title: ' Title',
+            // all titles will be injected into this template
+            titleTemplate: 'My Awesome Webapp'
+        }
     }
 </script>
 

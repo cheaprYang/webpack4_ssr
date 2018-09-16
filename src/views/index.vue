@@ -6,7 +6,15 @@
 
 <script>
     export default {
-        name: "index"
+        name: "index",
+        title:'index',
+        head: {
+            // if no subcomponents specify a metaInfo.title, this title will be used
+            title: '首页',
+            meta: [
+                { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+            ]
+        }
     }
 </script>
 

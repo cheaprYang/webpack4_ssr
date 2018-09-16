@@ -72,12 +72,7 @@ app.use('/public', serve('../public', true))
 app.use('/manifest.json', serve('../manifest.json', true))
 app.use('/service-worker.js', serve('../dist/service-worker.js'))
 
-// since this app has no user-specific content, every page is micro-cacheable.
-// if your app involves user-specific content, you need to implement custom
-// logic to determine whether a request is cacheable based on its url and
-// headers.
-// 1-second microcache.
-// https://www.nginx.com/blog/benefits-of-microcaching-nginx/
+
 app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl))
 
 function render (req, res) {
@@ -99,16 +94,19 @@ function render (req, res) {
         }
     }
 
+
+
     const context = {
-        title: 'Vue HN 2.0', // default title
-        url: req.url
+        title:'', // default title
+        url: req.url,
+
     }
     renderer.renderToString(context, (err, html) => {
         //console.log(context,err,html)
         if (err) {
             return handleError(err)
         }
-        // console.log(html)
+        //console.log(context.meta.inject().meta.text())
         res.send(html)
         if (!isProd) {
             console.log(`whole request: ${Date.now() - s}ms`)
