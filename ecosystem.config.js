@@ -2,6 +2,7 @@ module.exports = {
   apps : [{
     name      : 'app',
     script    : './server/index.js',
+    node_args : "--harmony",
     env: {
       NODE_ENV: 'development'
     },
