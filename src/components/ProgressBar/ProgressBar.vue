@@ -84,7 +84,7 @@
     }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
     .progress{
         position: fixed;
         top: 0px;

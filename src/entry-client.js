@@ -1,4 +1,6 @@
 import Vue from 'vue'
+
+
 import createApp from './app.js'
 let { app, router ,store} = createApp()
 import ProgressBar from './components/ProgressBar'

@@ -17,7 +17,7 @@
     }
 </script>
 
-<style lang="less">
+<style lang="scss">
   .home{
       background-color: yellow;
      .title{

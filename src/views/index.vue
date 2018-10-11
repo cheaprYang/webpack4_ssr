@@ -1,5 +1,8 @@
 <template>
     <div class="test">
+        <at-button type="primary">主要按钮</at-button>
+        <at-button>次要按钮</at-button>
+        <at-button type="text">文字按钮</at-button>
        <p class="title">测试</p>
     </div>
 </template>
@@ -18,7 +21,7 @@
     }
 </script>
 
-<style lang="less">
+<style >
   .test{
       background-color: red;
 

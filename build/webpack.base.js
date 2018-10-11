@@ -19,7 +19,8 @@ module.exports={
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: ["babel-loader"]
+                use: ["babel-loader"],
+                include: path.resolve(__dirname, 'src')
             },
             {
                 test:/\.vue$/,
@@ -28,18 +29,17 @@ module.exports={
                     extractCSS: true
                 }
             },
-            {// loader less and css
-                test: /\.(less|css)$/,
+            {
+                test: /\.css$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: 'dist'
+                        }
+                    },
                     {
                         loader: 'css-loader',
-                        options: {
-                            importLoaders: 1,
-                            minimize: true,
-                           // sourceMap: true,
-                            modules:false
-                        }
                     },
                     {
                         loader: 'postcss-loader',
@@ -48,11 +48,58 @@ module.exports={
                                 path: path.resolve(__dirname, './postcss.config.js')
                             },
                            // sourceMap: true
-                        },
-                    },
-                    "less-loader"
+                        }
+                    }
                 ]
             },
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: 'dist'
+                        }
+                    },
+                    // "style-loader",
+                    {loader: 'css-loader',options: {importLoaders: 2}},  //2代表css-loader后还需要几个loader
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: path.resolve(__dirname, './postcss.config.js')
+                            },
+                            // sourceMap: true
+                        },
+                    },
+                    'sass-loader'
+                ]
+            },
+            // {// loader less and css
+            //     test: /\.(scss|css)$/,
+            //     use: [
+            //         MiniCssExtractPlugin.loader,
+            //         {
+            //             loader: 'css-loader',
+            //             options: {
+            //                 importLoaders: 1,
+            //                 minimize: true,
+            //                 // sourceMap: true,
+            //                 modules:false
+            //             }
+            //         },
+            //         {
+            //             loader: 'postcss-loader',
+            //             options: {
+            //                 config: {
+            //                     path: path.resolve(__dirname, './postcss.config.js')
+            //                 },
+            //                 // sourceMap: true
+            //             },
+            //         },
+            //         "sass-loader"
+            //     ]
+            // },
             {
                 test: /\.(png|svg|jpg|gif|jpeg)$/,
                 use: [
@@ -65,6 +112,18 @@ module.exports={
                     },
                 ]
             },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            limit: 5000,
+                            name: "fonts/[name].[ext]",
+                        }
+                    },
+                ]
+            }
         ]
     },
      plugins: [
@@ -77,7 +136,7 @@ module.exports={
          }),
      ],
     resolve: {
-        extensions: ['.js','.vue','.less','.css'],
+        extensions: ['.js','.vue'],
         alias: {
             'vue': 'vue/dist/vue.esm.js',
             '@': path.resolve('src'),
