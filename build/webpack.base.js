@@ -12,7 +12,7 @@ module.exports={
     output: {
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/',
-        filename: 'js/[name].js'
+        filename: '[name].[chunkhash].js'
     },
     module: {
         rules: [
@@ -34,9 +34,6 @@ module.exports={
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            publicPath: 'dist'
-                        }
                     },
                     {
                         loader: 'css-loader',
@@ -57,9 +54,6 @@ module.exports={
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            publicPath: 'dist'
-                        }
                     },
                     // "style-loader",
                     {loader: 'css-loader',options: {importLoaders: 2}},  //2代表css-loader后还需要几个loader
@@ -104,10 +98,12 @@ module.exports={
                 test: /\.(png|svg|jpg|gif|jpeg)$/,
                 use: [
                     {
-                        loader: 'file-loader',
+                        loader: 'url-loader',
                         options: {
                             limit: 5000,
-                            name: "imgs/[name].[ext]",
+                            name: '[name].[ext]?[hash]',
+                            outputPath: 'images',
+                            // publicPath:'dist'
                         }
                     },
                 ]
@@ -130,8 +126,8 @@ module.exports={
          new VueLoaderPlugin(),
          new FriendlyErrorsPlugin(),
          new MiniCssExtractPlugin({
-             filename: "static/css/app.[name].css",
-             chunkFilename: "static/css/app.[id].css",
+             filename: "css/app.[name].css",
+             chunkFilename: "css/app.[id].css",
              sourceMap: false
          }),
      ],
