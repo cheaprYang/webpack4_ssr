@@ -19,6 +19,7 @@ module.exports=merge(base,{
         app: './src/entry-client.js'
     },
     output:{
+        path:path.resolve(__dirname, '../dist'),
         filename: utils.assetsPath('js/[name].[chunkhash:8].js'),
         chunkFilename: utils.assetsPath('js/[name].[chunkhash:8].js')
     },

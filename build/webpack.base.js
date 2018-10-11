@@ -3,6 +3,7 @@ const path=require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const utils=require('./utils')
 
 module.exports={
     target: "web",
@@ -101,8 +102,7 @@ module.exports={
                         loader: 'url-loader',
                         options: {
                             limit: 5000,
-                            name: '[name].[ext]?[hash]',
-                            outputPath: 'images',
+                            name: utils.assetsPath('img/[name].[hash:7].[ext]'),
                             // publicPath:'dist'
                         }
                     },
@@ -115,7 +115,7 @@ module.exports={
                         loader: 'file-loader',
                         options: {
                             limit: 5000,
-                            name: "fonts/[name].[ext]",
+                            name: utils.assetsPath("fonts/[name].[ext]"),
                         }
                     },
                 ]
@@ -126,8 +126,8 @@ module.exports={
          new VueLoaderPlugin(),
          new FriendlyErrorsPlugin(),
          new MiniCssExtractPlugin({
-             filename: "css/app.[name].css",
-             chunkFilename: "css/app.[id].css",
+             filename: utils.assetsPath("css/app.[name].css"),
+             chunkFilename: utils.assetsPath("css/app.[id].css"),
              sourceMap: false
          }),
      ],

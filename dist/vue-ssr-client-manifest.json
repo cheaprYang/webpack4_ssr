@@ -1,189 +1,176 @@
 {
   "publicPath": "/",
   "all": [
-    "css/app.2.css",
-    "images/TB1zsNhXTtYBeNjy1XdXXXXyVXa-2252-1500.png?e33471629415c521f7ab25608d016801",
-    "fonts/feather.woff",
-    "images/feather.svg?023ba0824a99109c4a63622228dd6354",
-    "fonts/feather.ttf",
-    "css/app.0.css",
-    "static/js/app.eac09c6c.js",
-    "css/app.1.css",
-    "static/js/1.e3bbef11.js",
-    "fonts/feather.eot",
-    "static/js/2.3389b88d.js",
-    "css/app.3.css",
-    "static/js/3.6cc908d0.js",
-    "css/app.4.css",
-    "static/js/4.4a95d357.js",
-    "css/app.5.css",
-    "static/js/vendor.409c046b.js",
-    "static/js/manifest.19c27d96.js",
+    "static/css/app.0.css",
+    "static/img/TB1zsNhXTtYBeNjy1XdXXXXyVXa-2252-1500.e334716.png",
+    "static/fonts/feather.woff",
+    "static/img/feather.023ba08.svg",
+    "static/fonts/feather.ttf",
+    "static/fonts/feather.eot",
+    "static/js/app.e70bcfbc.js",
+    "static/css/app.1.css",
+    "static/js/vendor.147d1343.js",
+    "static/js/manifest.0e4d3e78.js",
     "index.html"
   ],
   "initial": [
-    "static/js/manifest.19c27d96.js",
-    "static/js/vendor.409c046b.js",
-    "static/js/app.eac09c6c.js"
+    "static/js/manifest.0e4d3e78.js",
+    "static/js/vendor.147d1343.js",
+    "static/js/app.e70bcfbc.js"
   ],
-  "async": [
-    "static/js/1.e3bbef11.js",
-    "static/js/2.3389b88d.js",
-    "static/js/3.6cc908d0.js",
-    "static/js/4.4a95d357.js"
-  ],
+  "async": [],
   "modules": {
     "10272016": [
-      7,
-      8
-    ],
-    "9fcd7072": [
-      15,
-      16
-    ],
-    "7d6b6444": [
-      5,
+      0,
       6
     ],
-    "6f571cec": [
-      5,
+    "c7cce11c": [
+      0,
       6
     ],
     "6fb38a77": [
       0,
-      10
-    ],
-    "7b6f1558": [
-      11,
-      12
-    ],
-    "069c3b44": [
-      5,
       6
     ],
-    "0495f640": [
-      13,
-      14
+    "2b7beca7": [
+      0,
+      6
     ],
     "506c1098": [
-      11,
-      12
+      0,
+      6
     ],
     "5933b96e": [
-      13,
-      14
+      0,
+      6
     ],
     "2e497508": [
-      13,
-      14
+      0,
+      6
     ],
     "7de4e308": [
-      13,
-      14
+      0,
+      6
+    ],
+    "069c3b44": [
+      0,
+      6
     ],
     "2e286098": [
-      15,
-      16
-    ],
-    "bc88e0f0": [
-      5,
-      6
-    ],
-    "6659e863": [
-      15,
-      16
-    ],
-    "bbe4c946": [
-      5,
-      6
-    ],
-    "d68ee0e2": [
-      11,
-      12
-    ],
-    "1b040246": [
-      15,
-      16
-    ],
-    "4ee88682": [
-      11,
-      12
-    ],
-    "7aef4743": [
-      15,
-      16
-    ],
-    "19b49510": [
-      5,
-      6
-    ],
-    "7beb92ab": [
-      15,
-      16
-    ],
-    "7c013901": [
-      15,
-      16
-    ],
-    "27d24ddd": [
-      15,
-      16
-    ],
-    "bf420496": [
-      15,
-      16
-    ],
-    "c86db4a6": [
-      15,
-      16
-    ],
-    "9810f236": [
       7,
       8
     ],
-    "07b54e08": [
-      5,
+    "bc88e0f0": [
+      0,
+      6
+    ],
+    "6659e863": [
+      7,
+      8
+    ],
+    "d68ee0e2": [
+      0,
+      6
+    ],
+    "1b040246": [
+      7,
+      8
+    ],
+    "4ee88682": [
+      0,
+      6
+    ],
+    "7aef4743": [
+      7,
+      8
+    ],
+    "19b49510": [
+      0,
+      6
+    ],
+    "7beb92ab": [
+      7,
+      8
+    ],
+    "7c013901": [
+      7,
+      8
+    ],
+    "27d24ddd": [
+      7,
+      8
+    ],
+    "f32a5e9c": [
+      0,
+      6
+    ],
+    "bf420496": [
+      7,
+      8
+    ],
+    "c86db4a6": [
+      7,
+      8
+    ],
+    "9810f236": [
+      0,
       6
     ],
     "c9442b4a": [
       0,
-      10
+      6
     ],
     "5fc1ef68": [
       0,
-      10
-    ],
-    "10cb5978": [
-      7,
-      8
-    ],
-    "329774da": [
-      7,
-      8
-    ],
-    "9bb67672": [
-      15,
-      16
-    ],
-    "c7cce11c": [
-      5,
       6
     ],
+    "10cb5978": [
+      0,
+      6
+    ],
+    "329774da": [
+      0,
+      6
+    ],
+    "9bb67672": [
+      7,
+      8
+    ],
     "53d21d5b": [
-      15,
-      16
+      7,
+      8
     ],
     "afe5dcaa": [
-      5,
+      0,
+      6
+    ],
+    "7b6f1558": [
+      0,
+      6
+    ],
+    "0495f640": [
+      0,
+      6
+    ],
+    "9fcd7072": [
+      7,
+      8
+    ],
+    "7d6b6444": [
+      0,
       6
     ],
     "3d2d9929": [
       0,
-      10
+      6
     ],
     "5d09871e": [
-      15,
-      16
+      7,
+      8
+    ],
+    "6f571cec": [
+      0,
+      6
     ]
   }
 }
