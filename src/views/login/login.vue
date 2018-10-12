@@ -66,7 +66,7 @@
          height: 100%;
          width: 100%;
          background: url($backgroundImage) no-repeat;
-         background-size: 100%;
+         background-size:cover;
      }
      &-wrapper{
          position: absolute;

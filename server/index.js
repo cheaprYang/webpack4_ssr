@@ -67,9 +67,7 @@ const serve = (path, cache) => express.static(resolve(path), {
 app.use(compression({ threshold: 0 }))
 //app.use(favicon('./public/logo-48.png'))
 app.use('/dist', serve('../dist', true))
-app.use('/static', serve('../dist/static', true))
-app.use('/*', serve('../dist/*', true))
-app.use('/public', serve('../public', true))
+ app.use('/static', serve('../static', true))
 app.use('/manifest.json', serve('../manifest.json', true))
 app.use('/service-worker.js', serve('../dist/service-worker.js'))
 
@@ -86,10 +84,13 @@ function render (req, res) {
         if (err.url) {
             res.redirect(err.url)
         } else if(err.code === 404) {
-            res.status(404).send('404 | Page Not Found')
+            const path_404= resolve('../public/404.html')
+            const template = fs.readFileSync(path_404, 'utf-8')
+            res.status(404).send(template)
         } else {
-            // Render Error Page or Redirect
-            res.status(500).send('500 | Internal Server Error')
+            const path_500= resolve('../public/500.html')
+            const template_500 = fs.readFileSync(path_500, 'utf-8')
+            res.status(500).send(template_500)
             console.error(`error during render : ${req.url}`)
             console.error(err.stack)
         }

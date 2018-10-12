@@ -7,7 +7,7 @@
     "static/img/feather.023ba08.svg",
     "static/fonts/feather.ttf",
     "static/fonts/feather.eot",
-    "static/js/app.e70bcfbc.js",
+    "static/js/app.16ddb854.js",
     "static/css/app.1.css",
     "static/js/vendor.147d1343.js",
     "static/js/manifest.0e4d3e78.js",
@@ -16,7 +16,7 @@
   "initial": [
     "static/js/manifest.0e4d3e78.js",
     "static/js/vendor.147d1343.js",
-    "static/js/app.e70bcfbc.js"
+    "static/js/app.16ddb854.js"
   ],
   "async": [],
   "modules": {
@@ -44,7 +44,7 @@
       0,
       6
     ],
-    "2e497508": [
+    "3dff0eab": [
       0,
       6
     ],

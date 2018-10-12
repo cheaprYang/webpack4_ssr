@@ -4,7 +4,6 @@ import createRouter from './router'
 import createStore from './store'
 import AtComponents from 'at-ui'
 Vue.use(AtComponents)
-
 import 'at-ui-style/src/index.scss'    // 引入组件样式
 import App from './App.vue'
 
