@@ -3,6 +3,11 @@ module.exports = {
     name      : 'app',
     script    : './server/index.js',
     node_args : "--harmony",
+    "error_file"      : "/var/logs/err.log",
+    "out_file"        : "/var/logs/out.log",
+    "pid_file"        : "/var/pid/app.pid",
+    "merge_logs"      : true,
+    "log_date_format" : "YYYY-MM-DD HH:mm Z",
     env: {
       NODE_ENV: 'development'
     },
